@@ -1,0 +1,7 @@
+{
+    "email": "belvaaaan@gmail.com",
+    "password": "woaiwo??123",
+    "timeout":300,
+    "cache_file_path":"/tmp/chatter",
+    "access_token_seconds_to_expire":1800
+}
