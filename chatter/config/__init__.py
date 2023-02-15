@@ -12,18 +12,38 @@ import sys
 from importlib.metadata import version
 from os import path
 
-import os
+import cfg4py
 
 logger = logging.getLogger(__name__)
 
 
 def get_config_dir():
-    _dir = os.path.expanduser("~/.chatter/config")
+    server_role = os.environ.get(cfg4py.envar)
+
+    if server_role == "DEV":
+        _dir = path.normpath(path.join(path.dirname(__file__), "../config"))
+    elif server_role == "TEST":
+        _dir = path.expanduser("~/.zillionare/backtest/config")
+    else:
+        _dir = path.expanduser("~/zillionare/backtest/config")
 
     sys.path.insert(0, _dir)
-    logger.info("config dir is %s", _dir)
     return _dir
 
 
+def home_dir():
+    server_role = os.environ.get(cfg4py.envar)
+
+    if server_role == "DEV":
+        os.makedirs("/tmp/chatter", exist_ok=True)
+        return "/tmp/chatter"
+
+    return path.expanduser("~/chatter")
+
+
 def endpoint():
-    return "abcde"
+    cfg = cfg4py.get_instance()
+
+    major, minor, *_ = version("zillionare-chatter").split(".")
+    prefix = cfg.server.prefix.rstrip("/")
+    return f"{prefix}/v{major}.{minor}"

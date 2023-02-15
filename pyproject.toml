@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "chatter"
+name = "zillionare-chatter"
 version = "0.2.2"
 description = ""
 authors = ["aaron yang <aaron_yang@jieyu.ai>"]

@@ -22,6 +22,9 @@ logging:
       - file
     level: INFO
 
+server:
+    port: 2130
+    
 notify:
     dingtalk_access_token: ${DINGTALK_ACCESS_TOKEN}
     dingtalk_secret:  ${DINGTALK_SECRET}
